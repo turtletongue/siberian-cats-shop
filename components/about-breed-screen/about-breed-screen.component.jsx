@@ -1,10 +1,11 @@
 import { Flex, Box, Text, Center, useMediaQuery } from '@chakra-ui/react';
 import Image from 'next/image';
 
-const WelcomeScreen = () => {
+const AboutBreedScreen = () => {
   const [isLessThan800] = useMediaQuery("(max-width: 800px)");
   return (
     <Flex
+      minH="100vh"
       direction={isLessThan800 ? "column" : "row"}
       w="100%"
       bgColor="white"
@@ -51,4 +52,4 @@ const WelcomeScreen = () => {
   );
 }
 
-export default WelcomeScreen;
+export default AboutBreedScreen;

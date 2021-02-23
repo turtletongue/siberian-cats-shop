@@ -19,7 +19,7 @@ const Menu = () => {
         w={isLessThan600 ? "100%" : "65%"}
         p="1rem"
       >
-        <Link href="#">
+        <Link href="#home">
           <a>
             <Text
               fontFamily="Maven Pro"
@@ -35,7 +35,7 @@ const Menu = () => {
           </a>
         </Link>
         <Spacer />
-        <Link href="#">
+        <Link href="#breed">
           <a>
             <Text
               fontFamily="Maven Pro"
@@ -51,7 +51,7 @@ const Menu = () => {
           </a>
         </Link>
         <Spacer />
-        <Link href="#">
+        <Link href="#cats">
           <a>
             <Text
               fontFamily="Maven Pro"
@@ -67,7 +67,7 @@ const Menu = () => {
           </a>
         </Link>
         <Spacer />
-        <Link href="#">
+        <Link href="#contact">
           <Text
             fontFamily="Maven Pro"
             letterSpacing="widest"

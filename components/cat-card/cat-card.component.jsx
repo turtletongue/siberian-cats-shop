@@ -1,12 +1,16 @@
 import { Box, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Date from '../date/date.component';
+import { useRouter } from 'next/router';
 
-const CatCard = () => {
+const CatCard = ({ id, name, imageUrl, birthday, sex }) => {
+  const router = useRouter();
   return (
-    <Link href="/">
+    <Link href={`/cats/${id}`}>
       <a>
         <Box
+          mb="1rem"
           maxW="sm"
           borderRadius="lg"
           borderWidth="1px"
@@ -14,38 +18,38 @@ const CatCard = () => {
           bgColor="white"
         >
           <Image
-            src="/images/pexels-photo-2558605.jpeg"
+            src={imageUrl}
             width={350}
             height={200}
-            alt="Cat Name"
+            alt={name}
           />
           <Box p="1rem">
             <Text
-              fontFamily="Maven Pro"
+              fontFamily="PT Sans"
               fontSize="2xl"
               color="blue.400"
-            >Alice</Text>
+            >{ name }</Text>
             <Text
-              fontFamily="Maven Pro"
+              fontFamily="PT Sans"
               fontSize="lg"
               color="#7b7b7b"
             >
-              Age: 3 months
+              { router.locale === 'ru' ? 'День рождения' : 'Birthday' }: <Date dateString={ birthday } />
             </Text>
             <Text
-              fontFamily="Maven Pro"
+              fontFamily="PT Sans"
               fontSize="lg"
               color="#7b7b7b"
             >
-              Sex: Female
+              { router.locale === 'ru' ? 'Пол' : 'Sex' }: { sex }
             </Text>
             <Text
               textAlign="center"
               mt="0.5rem"
-              fontFamily="Maven Pro"
+              fontFamily="PT Sans"
               fontSize="sm"
             >
-              Click to view more...
+              { router.locale === 'ru' ? 'Нажмите, чтобы узнать больше' : 'Click to view more' }...
             </Text>
           </Box>
         </Box>

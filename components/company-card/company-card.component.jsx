@@ -82,7 +82,7 @@ const CompanyCard = () => {
           mt="1rem"
           color="#7b7b7b"
           fontSize="lg"
-          fontFamily="Maven Pro"
+          fontFamily="PT Sans"
           textAlign="center"
           letterSpacing="widest"
         >beauty and respectability</Text>

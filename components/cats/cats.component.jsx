@@ -1,7 +1,9 @@
 import { Flex, Text, Grid, GridItem, useMediaQuery } from '@chakra-ui/react';
 import CatCard from '../cat-card/cat-card.component';
+import { useRouter } from 'next/router';
 
-const Cats = () => {
+const Cats = ({ listOfCats }) => {
+  const router = useRouter();
   const [isLessThan800] = useMediaQuery("(max-width: 800px)");
   return (
     <Flex
@@ -14,18 +16,31 @@ const Cats = () => {
       <Text
         textAlign="center"
         fontSize={isLessThan800 ? "4xl" : "6xl"}
-        fontFamily="Maven Pro"
+        fontFamily="PT Sans"
         color="#7b7b7b"
-      >Our Cats</Text>
+      >{ router.locale === 'ru' ? 'Наши кошки' : 'Our Cats' }</Text>
       <Grid
         w="100%"
         p="2rem"
         columnGap="1rem"
         templateColumns="repeat(auto-fill, minmax(16rem, 1fr))"
       >
-        <GridItem>
-          <CatCard />
-        </GridItem>
+        {
+          listOfCats.map(cat => {
+            return (
+              <GridItem key={cat._id}>
+                <CatCard
+                  id={cat._id}
+                  name={cat.name}
+                  sex={cat.sex}
+                  birthday={cat.birthday}
+                  imageUrl={cat.imageUrl}
+                />
+              </GridItem>
+            );
+          })
+        }
+        
       </Grid>
     </Flex>
   );

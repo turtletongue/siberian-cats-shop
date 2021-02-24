@@ -1,7 +1,9 @@
 import { Flex, Box, Text, Center, useMediaQuery } from '@chakra-ui/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const AboutBreedScreen = () => {
+  const router = useRouter();
   const [isLessThan800] = useMediaQuery("(max-width: 800px)");
   return (
     <Flex
@@ -29,22 +31,29 @@ const AboutBreedScreen = () => {
           <Text
             textAlign="center"
             fontSize={isLessThan800 ? "4xl" : "6xl"}
-            fontFamily="Maven Pro"
+            fontFamily="PT Sans"
             color="#7b7b7b"
           >
-            About Breed
+            { router.locale === 'ru' ? "О породе" : "About Breed"}
           </Text>
           <Text
             textAlign="justify"
             fontSize="xl"
-            fontFamily="Maven Pro"
+            fontFamily="PT Sans"
           >
-            The Siberian cat, also called the Siberian forest cat,
-            is an adventurous and athletically built cat who possesses
-            a gentle and affectionate disposition.
-            {' '}
-            The Siberian cat is one of the healthier cat breeds
-            with minimal known hereditary health issues.
+            { router.locale === 'ru' ? (
+              `Сибирская кошка, также называемая сибирской лесной кошкой,
+              - это предприимчивая и атлетически сложенная кошка, обладающая
+              мягким и ласковым нравом. 
+              Сибирская кошка - одна из самых здоровых пород кошек
+              с минимальными известными наследственными проблемами со здоровьем.`
+            ) : (
+              `The Siberian cat, also called the Siberian forest cat,
+              is an adventurous and athletically built cat who possesses
+              a gentle and affectionate disposition. 
+              The Siberian cat is one of the healthier cat breeds
+              with minimal known hereditary health issues.`
+            ) }
           </Text>
         </Box>
       </Center>

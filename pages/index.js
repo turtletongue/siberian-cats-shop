@@ -1,9 +1,8 @@
+import { connectToMongoDB } from '../utils/db-connect';
+import Cat from '../models/cat';
+
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-const Menu = dynamic(
-  () => import('../components/menu/menu.component'),
-  { ssr: false }
-);
 const MainScreen = dynamic(
   () => import('../components/main-screen/main-screen.component'),
   { ssr: false }
@@ -21,19 +20,18 @@ const ContactScreen = dynamic(
   { ssr: false }
 );
 
-export default function Home() {
+export default function Home({ listOfCats }) {
   return (
     <>
       <Head>
         <title>Cat Shop</title>
       </Head>
-      <Menu />
       <a name="home" />
       <MainScreen />
       <a name="breed" />
       <AboutBreedScreen />
       <a name="cats" />
-      <Cats />
+      <Cats listOfCats={ listOfCats } />
       <a name="contact" />
       <ContactScreen />
     </>
@@ -41,7 +39,20 @@ export default function Home() {
 }
 
 export const getStaticProps = async () => {
+  await connectToMongoDB();
+  const cats = await Cat.find();
+  const listOfCats = cats.map(cat => ({
+    _id: cat._id.toString(),
+    birthday: cat._doc.birthday.toISOString(),
+    name: cat._doc.name,
+    sex: cat._doc.sex,
+    imageUrl: cat._doc.imageUrl,
+    images: cat._doc.images
+  }));
   return {
-    props: {}
+    props: {
+      listOfCats
+    },
+    revalidate: 60
   }
 }
